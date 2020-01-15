@@ -6,5 +6,7 @@ export class AppController {
 
   @Get()
   @Render('home-page')
-  renderLandingPage() {}
+  renderLandingPage() {
+    return { pageTitle: 'Project Management' };
+  }
 }
