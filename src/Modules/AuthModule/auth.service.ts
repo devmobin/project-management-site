@@ -7,6 +7,6 @@ export class AuthService {
   constructor(private readonly userAuthService: UserAuthService) {}
 
   async registerUser(signupDTO: SignupDTO) {
-    this.userAuthService.registerUser(signupDTO);
+    await this.userAuthService.registerUser(signupDTO);
   }
 }

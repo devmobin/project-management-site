@@ -7,8 +7,8 @@ export const typeOrmOptions: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 3306,
   username: 'devmobin',
-  password: 'Kwc8rs8jYWRnQTMA',
+  password: 'vAeic7XeraiiT33Q',
   database: 'devdemo_db',
-  entities: ['../**/*.entity.ts'],
-  synchronize: true
+  entities: [__dirname + '/../**/*.entity.js'],
+  synchronize: true,
 }

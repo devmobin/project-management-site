@@ -11,9 +11,14 @@ export class AuthController {
   @Post('signup')
   @UsePipes(ValidationPipe)
   @Render('auth')
-  signupUser(@Body() signupDTO: SignupDTO): RenderOptions {
-    this.authService.registerUser(signupDTO);
-
-    return { pageTitle: 'Signed', mode: 'login' };
+  async signupUser(@Body() signupDTO: SignupDTO): Promise<RenderOptions> {
+    let error: string;
+    try {
+      await this.authService.registerUser(signupDTO);
+    } catch (e) {
+      error = e.message;
+    }
+    
+    return { pageTitle: 'Signed', mode: 'login', error };
   }
 }

@@ -1,7 +1,23 @@
 import { Injectable } from '@nestjs/common';
 import { SignupDTO } from '../Shared/dto/signup.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './db/user.entity';
+import { UserRepository } from './db/user.repository';
 
 @Injectable()
 export class UserAuthService {
-  registerUser(signupDTO: SignupDTO): void {}
+  constructor(
+    @InjectRepository(User)
+    private userRepository: UserRepository,
+  ) {}
+
+  async registerUser(signupDTO: SignupDTO): Promise<User> {
+    const _user = new User();
+
+    Object.keys(signupDTO).forEach(key => (_user[key] = signupDTO[key]));
+
+    await this.userRepository.save(_user);
+
+    return _user;
+  }
 }
