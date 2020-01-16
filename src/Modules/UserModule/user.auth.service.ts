@@ -11,13 +11,13 @@ export class UserAuthService {
     private userRepository: UserRepository,
   ) {}
 
-  async registerUser(signupDTO: SignupDTO): Promise<User> {
+  async registerUser(signupDTO: SignupDTO): Promise<string> {
     const _user = new User();
 
     Object.keys(signupDTO).forEach(key => (_user[key] = signupDTO[key]));
 
     await this.userRepository.save(_user);
 
-    return _user;
+    return `Now you can login with email: '${_user.email}'`;
   }
 }

@@ -1,24 +1,24 @@
 import { Controller, Post, Render, Body, UsePipes } from '@nestjs/common';
-import { AuthService } from './auth.service';
 import { SignupDTO } from '../Shared/dto/signup.dto';
 import { ValidationPipe } from '../Shared/pipe/validation.pipe';
 import { RenderOptions } from 'src/Config/render-options';
+import { UserAuthService } from '../UserModule/user.auth.service';
 
 @Controller()
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly userAuthService: UserAuthService) {}
 
   @Post('signup')
   @UsePipes(ValidationPipe)
   @Render('auth')
   async signupUser(@Body() signupDTO: SignupDTO): Promise<RenderOptions> {
-    let error: string;
+    let error: string, message: string;
     try {
-      await this.authService.registerUser(signupDTO);
+      message = await this.userAuthService.registerUser(signupDTO);
     } catch (e) {
       error = e.message;
     }
-    
-    return { pageTitle: 'Signed', mode: 'login', error };
+
+    return { pageTitle: 'Login', mode: 'login', error, message };
   }
 }
