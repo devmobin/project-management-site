@@ -1,6 +1,6 @@
 import { Controller, Post, Render, Body, UsePipes } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignupDTO } from './dto/signup.dto';
+import { SignupDTO } from '../Shared/dto/signup.dto';
 import { ValidationPipe } from '../Shared/pipe/validation.pipe';
 import { RenderOptions } from 'src/Config/render-options';
 
