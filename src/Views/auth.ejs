@@ -1,4 +1,4 @@
-<%- include('./includes/head', { pageTitle: pageTitle }) %>
+<%- include('./includes/head.ejs', { pageTitle: pageTitle }) %>
     <style>
       label {
         margin-left: 50px !important;
@@ -6,7 +6,10 @@
       .input-group {
         margin-top: 2px !important;
       }
-      .card-login .form {
+      .login-mode {
+        min-height: 320px !important;
+      }
+      .signup-mode {
         min-height: 380px !important;
       }
     </style>
@@ -20,7 +23,7 @@
     >
       <div class="container">
         <div class="navbar-translate">
-          <a class="navbar-brand" href="./home-page.html">
+          <a class="navbar-brand" href="../">
             Project Management
           </a>
           <button
@@ -57,27 +60,31 @@
     </nav>
     <div
       class="page-header header-filter"
-      style="background-image: url('assets/img/bg7.jpg'); background-size: cover; background-position: top center;"
+      style="background-image: url('/assets/img/bg7.jpg'); background-size: cover; background-position: top center;"
     >
       <div class="container">
         <div class="row">
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-            <div class="card card-login">
-              <form class="form" method="" action="">
+            <div class="card card-login ">
+              <form class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %>"
+                method="POST"
+                action="<%= mode === 'signup' ? '/signup' : '/login' %>">
                 <div class="card-header card-header-rose text-center">
-                  <h4 class="card-title">Login</h4>
+                  <h4 class="card-title"><%= mode === 'signup' ? 'SignUp' : 'Login' %></h4>
                 </div>
                 <p class="description text-center">Be Classical</p>
                 <div class="card-body">
-                  <div class="input-group bmd-form-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text">
-                        <i class="material-icons">person</i>
-                      </span>
-                      <label class="bmd-label-floating">Name</label>
+                  <%  if (mode === "signup") { %>
+                    <div class="input-group bmd-form-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="material-icons">person</i>
+                        </span>
+                        <label class="bmd-label-floating">Name</label>
+                      </div>
+                      <input type="text" class="form-control" placeholder="" />
                     </div>
-                    <input type="text" class="form-control" placeholder="" />
-                  </div>
+                  <% } %>
 
                   <div class="input-group bmd-form-group">
                     <div class="input-group-prepend">
@@ -105,9 +112,11 @@
                 </div>
                 <div class="footer text-center mb-2">
                   <button type="submit" class="btn btn-success mb-2">
-                    Login
+                    <%= mode === 'signup' ? 'Register' : 'Login' %>
                   </button>
-                  <a href="#" class="btn btn-outline-danger mb-2">Register</a>
+                  <a href="<%= mode === 'signup' ? '/login' : '/signup' %>" 
+                    class="btn btn-outline-danger mb-2">
+                    <%= mode === 'signup' ? 'Login' : 'Register' %></a>
                 </div>
               </form>
             </div>
@@ -116,4 +125,4 @@
       </div>
     </div>
     
-    <%- include('./includes/src') %>
+    <%- include('./includes/src.ejs') %>

@@ -1,4 +1,4 @@
-<%- include('./includes/head', { pageTitle: pageTitle }) %>
+<%- include('./includes/head.ejs', { pageTitle: pageTitle }) %>
   </head>
 
   <body>
@@ -28,13 +28,13 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a
-                href="./signup-login.html"
+                href="./signup/"
                 class="btn btn-default btn-round mr-2"
                 >Register</a
               >
             </li>
             <li class="nav-item">
-              <a href="./signup-login.html" class="btn btn-default btn-round"
+              <a href="./login" class="btn btn-default btn-round"
                 >Login</a
               >
             </li>
@@ -91,4 +91,4 @@
       </div>
     </footer>
     
-    <%- include('./includes/src') %>
+    <%- include('./includes/src.ejs') %>
