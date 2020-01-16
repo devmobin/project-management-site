@@ -1,5 +1,5 @@
 import { Controller, Get, Render } from '@nestjs/common';
-import { RenderOptions } from './render-options';
+import { RenderOptions } from '../../Config/render-options';
 
 @Controller()
 export class AppController {
