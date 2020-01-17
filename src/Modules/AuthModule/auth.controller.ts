@@ -12,9 +12,11 @@ export class AuthController {
   @UsePipes(ValidationPipe)
   @Render('auth')
   async signupUser(@Body() signupDTO: SignupDTO): Promise<RenderOptions> {
-    let error: string, message: string;
+    let message: string, error: string;
+
     try {
-      message = await this.userAuthService.registerUser(signupDTO);
+      await this.userAuthService.registerUser(signupDTO);
+      message = 'Signup has done. Now you can login.';
     } catch (e) {
       error = e.message;
     }

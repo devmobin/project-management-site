@@ -11,13 +11,7 @@ export class UserAuthService {
     private userRepository: UserRepository,
   ) {}
 
-  async registerUser(signupDTO: SignupDTO): Promise<string> {
-    const _user = new User();
-
-    Object.keys(signupDTO).forEach(key => (_user[key] = signupDTO[key]));
-
-    await this.userRepository.save(_user);
-
-    return `Now you can login with email: '${_user.email}'`;
+  async registerUser(signupDTO: SignupDTO): Promise<User> {
+    return await this.userRepository.registerUser(signupDTO);
   }
 }
