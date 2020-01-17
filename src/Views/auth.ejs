@@ -12,6 +12,12 @@
       .signup-mode {
         min-height: 380px !important;
       }
+      .has-message {
+        min-height: 380px !important;
+      }
+      .has-error {
+        min-height: 445px !important;
+      }
     </style>
   </head>
 
@@ -66,14 +72,23 @@
         <div class="row">
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
             <div class="card card-login ">
-              <form class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %>"
+              <form 
+                class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %> <%= locals.error ? 'has-error' : (locals.message ? 'has-message' : '') %>"
                 method="POST"
                 action="<%= mode === 'signup' ? '/signup' : '/login' %>">
                 <div class="card-header card-header-rose text-center">
                   <h4 class="card-title"><%= mode === 'signup' ? 'SignUp' : 'Login' %></h4>
                 </div>
-                <p class="description text-center">Be Classical. <br> 
-                  <% if (locals.error) { %> <%= error %> <% } if (locals.message) { %> <%= message %> <% } %>
+                <p class="description text-center">Be Classical. <br /> 
+                  <% if (locals.error) { %>
+                    <div class="alert alert-warning" role="alert">
+                      <%= error %>
+                    </div>
+                  <% } if (locals.message) { %>
+                    <div class="alert alert-success" role="alert">
+                      <%= message %> 
+                    </div>
+                  <% } %>
                 </p>
                 <div class="card-body">
                   <%  if (mode === "signup") { %>
