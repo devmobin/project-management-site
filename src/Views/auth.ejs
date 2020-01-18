@@ -15,9 +15,6 @@
       .has-message {
         min-height: 380px !important;
       }
-      .has-error {
-        min-height: 445px !important;
-      }
     </style>
   </head>
 
@@ -73,7 +70,7 @@
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
             <div class="card card-login ">
               <form 
-                class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %> <%= locals.error ? 'has-error' : (locals.message ? 'has-message' : '') %>"
+                class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %> <%= (locals.error || locals.message) ? 'has-message' : '' %>"
                 method="POST"
                 action="<%= mode === 'signup' ? '/signup' : '/login' %>">
                 <div class="card-header card-header-rose text-center">
