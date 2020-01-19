@@ -1,13 +1,11 @@
 const Container = require('./container');
 
 class BeanFactory {
-  _services = new Array();
+  static _services = Container._services;
 
-  constructor() {
-    this._services = Container._services;
-  }
+  constructor() {}
 
-  getInstance(name) {
+  static getInstance(name) {
     const found = this._services.filter(s => s.name === name)[0];
 
     if (found.scope === 'singleton') {
@@ -35,4 +33,4 @@ class BeanFactory {
   }
 }
 
-module.exports.BeanFactory = BeanFactory;
+module.exports = BeanFactory;

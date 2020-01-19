@@ -1,5 +1,5 @@
 const Port = 3000;
 
-exports = {
+module.exports = {
   Port
 };

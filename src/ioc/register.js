@@ -1,5 +1,13 @@
 const Container = require('./container/container');
 
-const registerIoc = () => {};
+const AuthController = require('../modules/AuthModule/auth.controller');
+const AuthService = require('../modules/AuthModule/auth.service');
 
-exports.registerIoc = registerIoc;
+const registerIoc = () => {
+  Container.register('IAuthService', AuthService);
+  Container.register('IAuthController', AuthController, 'singleton', [
+    'IAuthService'
+  ]);
+};
+
+module.exports = registerIoc;
