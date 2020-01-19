@@ -11,26 +11,29 @@ class BeanFactory {
     if (found.scope === 'singleton') {
       if (!found.instance) {
         if (found.dependencies.length > 0) {
-          let dep = [];
-          found.dependencies.forEach((d, index) => {
-            dep[index] = this.getInstance(d);
-          });
-          return (found.instance = new found.service(...dep));
+          const dependencies = getDependencies(found);
+          found.instance = new found.service(...dependencies);
+          return found.instance;
         }
         found.instance = new found.service();
       }
       return found.instance;
     } else {
       if (found.dependencies.length > 0) {
-        let dep = [];
-        found.dependencies.forEach((d, index) => {
-          dep[index] = this.getInstance(d);
-        });
-        return new found.service(...dep);
+        const dependencies = getDependencies(found);
+        return new found.service(...dependencies);
       }
       return new found.service();
     }
   }
 }
+
+const getDependencies = service => {
+  let dependencies = [];
+  service.dependencies.forEach((d, index) => {
+    dependencies[index] = BeanFactory.getInstance(d);
+  });
+  return dependencies;
+};
 
 module.exports = BeanFactory;
