@@ -4,7 +4,12 @@ class RenderOptions {
   error;
   message;
 
-  constructor(pageTitle, mode = null, error = null, message = null) {
+  constructor(
+    pageTitle,
+    mode = undefined,
+    error = undefined,
+    message = undefined
+  ) {
     this.pageTitle = pageTitle;
     this.mode = mode;
     this.error = error;
