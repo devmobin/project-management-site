@@ -9,6 +9,7 @@ const authRoutes = require('./modules/Router/auth.routes');
 const publicRoutes = require('./modules/Router/public.routes');
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.set('view engine', 'ejs');
 app.set('views', 'src/views');
