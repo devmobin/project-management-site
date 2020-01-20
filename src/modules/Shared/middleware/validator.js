@@ -7,11 +7,11 @@ class Validator {
     const { name, email, password } = req.body;
 
     if (
-      validate(name, { type: 'string', minLength: 2 }) &&
-      validate(email, { type: 'email' }) &&
-      validate(password, { type: 'string', minLength: 6 })
+      validate(name.trim(), { type: 'string', minLength: 2 }) &&
+      validate(email.trim(), { type: 'email' }) &&
+      validate(password.trim(), { type: 'string', minLength: 6 })
     ) {
-      req.signupDTO = new SignupDTO(name, email, password);
+      req.signupDTO = new SignupDTO(name.trim(), email.trim(), password.trim());
 
       return next();
     }
