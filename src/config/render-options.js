@@ -12,6 +12,4 @@ class RenderOptions {
   }
 }
 
-exports = {
-  RenderOptions
-};
+module.exports = RenderOptions;
