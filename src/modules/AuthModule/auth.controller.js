@@ -1,8 +1,6 @@
 class AuthController {
-  // AuthService
-  authService = undefined;
-
   constructor(authService) {
+    // AuthService
     this.authService = authService;
   }
 

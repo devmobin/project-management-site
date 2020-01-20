@@ -1,9 +1,4 @@
 class RenderOptions {
-  pageTitle;
-  mode;
-  error;
-  message;
-
   constructor(
     pageTitle,
     mode = undefined,
