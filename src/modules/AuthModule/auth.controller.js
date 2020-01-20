@@ -1,11 +1,32 @@
+const RenderOptions = require('../../config/render-options');
+
 class AuthController {
-  constructor(authService) {
+  constructor(authService, userService) {
     // AuthService
     this.authService = authService;
+    // UserService
+    this.userService = userService;
   }
 
-  signupUser = (req, res, next) => {
-    res.send('hello');
+  signupUser = async (req, res, next) => {
+    let render = new RenderOptions('Join us', 'login');
+
+    if (req.validationError) {
+      render.mode = 'signup';
+      render.error = req.validationError;
+      return res.render('auth', render);
+    }
+
+    try {
+      await this.userService.registerUser(req.signupDTO);
+      render.pageTitle = 'Login';
+      render.message = 'Now you can login';
+    } catch (e) {
+      render.mode = 'signup';
+      render.error = e.message;
+    }
+
+    res.render('auth', render);
   };
 
   loginUser = (req, res, next) => {
@@ -16,21 +37,6 @@ class AuthController {
 
 module.exports = AuthController;
 
-// @Post('signup')
-// @UsePipes(ValidationPipe)
-// @Render('auth')
-// async signupUser(@Body() signupDTO: SignupDTO): Promise<RenderOptions> {
-//   let message: string, error: string;
-
-//   try {
-//     await this.userAuthService.registerUser(signupDTO);
-//     message = 'Signup has done. Now you can login.';
-//   } catch (e) {
-//     error = e.message;
-//   }
-
-//   return { pageTitle: 'Join us', mode: 'login', error, message };
-// }
 
 // @Post('login')
 // @UsePipes(ValidationPipe)
