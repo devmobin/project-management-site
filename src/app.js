@@ -3,6 +3,7 @@ registerIoc();
 
 const path = require('path');
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 
 const authRoutes = require('./modules/Router/auth.routes');
@@ -17,5 +18,11 @@ app.use(express.static(path.join(__dirname, 'views', 'public')));
 
 app.use(authRoutes);
 app.use(publicRoutes);
+
+mongoose.connect('mongodb://localhost:27017/projectmanagement', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true
+});
 
 module.exports = app;

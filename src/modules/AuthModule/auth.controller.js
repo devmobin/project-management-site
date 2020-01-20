@@ -21,12 +21,12 @@ class AuthController {
       await this.userService.registerUser(req.signupDTO);
       render.pageTitle = 'Login';
       render.message = 'Now you can login';
+      res.render('auth', render);
     } catch (e) {
       render.mode = 'signup';
       render.error = e.message;
+      res.render('auth', render);
     }
-
-    res.render('auth', render);
   };
 
   loginUser = (req, res, next) => {
@@ -36,7 +36,6 @@ class AuthController {
 }
 
 module.exports = AuthController;
-
 
 // @Post('login')
 // @UsePipes(ValidationPipe)
