@@ -53,25 +53,3 @@ class AuthController {
 }
 
 module.exports = AuthController;
-
-// @Post('login')
-// @UsePipes(ValidationPipe)
-// async loginUser(
-//   @Body() loginDTO: LoginDTO,
-//   @Res() res: Response,
-// ): Promise<void> {
-//   let error: string;
-
-//   try {
-//     const valid = await this.userAuthService.validateUserCredentials(loginDTO);
-//     if (valid) {
-//       // generate session
-//     } else {
-//       error = 'incorrect password';
-//     }
-//   } catch (e) {
-//     error = e.message;
-//   }
-
-//   return res.render('auth', { pageTitle: 'Join us', mode: 'login', error });
-// }
