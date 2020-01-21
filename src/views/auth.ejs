@@ -12,8 +12,11 @@
       .signup-mode {
         min-height: 380px !important;
       }
-      .has-message {
+      .has-message-signup {
         min-height: 455px !important;
+      }
+      .has-message-login {
+        min-height: 380px !important;
       }
     </style>
   </head>
@@ -70,7 +73,7 @@
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
             <div class="card card-login ">
               <form 
-                class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %> <%= (locals.error || locals.message) ? 'has-message' : '' %>"
+                class="form <%= mode === 'signup' ? 'signup-mode' : 'login-mode' %> <%= (mode === 'login' ? ((locals.error || locals.message) ? 'has-message-login' : '') : ((locals.error || locals.message) ? 'has-message-signup' : '')) %>"
                 method="POST"
                 action="<%= mode === 'signup' ? '/signup' : '/login' %>">
                 <div class="card-header card-header-rose text-center">
