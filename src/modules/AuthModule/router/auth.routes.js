@@ -1,4 +1,4 @@
-const BeanFactory = require('../../ioc/container/bean-factory');
+const BeanFactory = require('../../../ioc/container/bean-factory');
 
 const express = require('express');
 const router = express.Router();

@@ -1,5 +1,5 @@
 const express = require('express');
-const RenderOptions = require('../../config/render-options');
+const RenderOptions = require('../../../config/render-options');
 
 const router = express.Router();
 

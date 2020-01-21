@@ -9,8 +9,8 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const app = express();
 
 const { MongoURI } = require('./config/config');
-const authRoutes = require('./modules/Router/auth.routes');
-const publicRoutes = require('./modules/Router/public.routes');
+const authRoutes = require('./modules/AuthModule/router/auth.routes');
+const publicRoutes = require('./modules/Shared/router/public.routes');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
