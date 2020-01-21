@@ -4,7 +4,6 @@ class UserService {
   constructor() {}
 
   registerUser = async signupDTO => {
-    // console.log(signupDTO, 'from user service');
     const user = new User();
 
     Object.keys(signupDTO).forEach(key => {
