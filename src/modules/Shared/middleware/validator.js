@@ -1,19 +1,28 @@
 const SignupDTO = require('../dto/signup.dto');
+const LoginDTO = require('../dto/login.dto');
 
 class Validator {
   constructor() {}
 
   signupRoute = (req, res, next) => {
-    const { name, email, password } = req.body;
+    try {
+      const { name, email, password } = req.body;
 
-    if (
-      validate(name.trim(), { type: 'string', minLength: 2 }) &&
-      validate(email.trim(), { type: 'email' }) &&
-      validate(password.trim(), { type: 'string', minLength: 6 })
-    ) {
-      req.signupDTO = new SignupDTO(name.trim(), email.trim(), password.trim());
+      if (
+        validate(name.trim(), { type: 'string', minLength: 2 }) &&
+        validate(email.trim(), { type: 'email' }) &&
+        validate(password.trim(), { type: 'string', minLength: 6 })
+      ) {
+        req.signupDTO = new SignupDTO(
+          name.trim(),
+          email.trim(),
+          password.trim()
+        );
 
-      return next();
+        return next();
+      }
+    } catch (e) {
+      req.validationError = 'Validation Error';
     }
 
     req.validationError =
@@ -22,7 +31,24 @@ class Validator {
     return next();
   };
 
-  loginRoute = (req, res, next) => {};
+  loginRoute = (req, res, next) => {
+    try {
+      const { email, password } = req.body;
+
+      if (
+        validate(email.trim(), { type: 'email' }) &&
+        validate(password.trim(), { type: 'string', minLength: 6 })
+      ) {
+        req.loginDTO = new LoginDTO(email.trim(), password.trim());
+
+        return next();
+      }
+    } catch (e) {
+      req.validationError = 'Validation Error';
+    }
+
+    req.validationError = 'Enter valid email and password';
+  };
 }
 
 module.exports = Validator;
