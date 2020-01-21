@@ -2,9 +2,9 @@ const RenderOptions = require('../../config/render-options');
 
 class AuthController {
   constructor(authService, userService) {
-    // AuthService
+    // AuthService injected by bean factory
     this.authService = authService;
-    // UserService
+    // UserService injected by bean factory
     this.userService = userService;
   }
 
@@ -41,8 +41,16 @@ class AuthController {
 
     try {
       const user = await this.userService.loginUser(req.loginDTO);
-      // if no error generate session and render profile
-      return res.render('user-profile', render);
+
+      req.session.user = user;
+
+      return req.session.save(e => {
+        if (e) {
+          throw new Error('Server Error');
+        }
+
+        res.redirect('/me');
+      });
     } catch (e) {
       render.pageTitle = 'Login';
       render.mode = 'login';

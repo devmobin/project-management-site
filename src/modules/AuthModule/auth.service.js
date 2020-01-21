@@ -1,3 +1,5 @@
-class AuthService {}
+class AuthService {
+  constructor() {}
+}
 
 module.exports = AuthService;
