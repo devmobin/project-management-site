@@ -23,6 +23,7 @@ class Validator {
       }
     } catch (e) {
       req.validationError = 'Validation Error';
+      return next();
     }
 
     req.validationError =
@@ -45,6 +46,7 @@ class Validator {
       }
     } catch (e) {
       req.validationError = 'Validation Error';
+      return next();
     }
 
     req.validationError = 'Enter valid email and password';
