@@ -4,8 +4,11 @@ registerIoc();
 const path = require('path');
 const express = require('express');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const MongoDBStore = require('connect-mongodb-session')(session);
 const app = express();
 
+const { MongoURI } = require('./config/config');
 const authRoutes = require('./modules/Router/auth.routes');
 const publicRoutes = require('./modules/Router/public.routes');
 
@@ -16,10 +19,24 @@ app.set('view engine', 'ejs');
 app.set('views', 'src/views');
 app.use(express.static(path.join(__dirname, 'views', 'public')));
 
+const store = new MongoDBStore({
+  uri: MongoURI,
+  collection: 'session'
+});
+
+app.use(
+  session({
+    secret: 'thisismysecret',
+    resave: false,
+    saveUninitialized: false,
+    store
+  })
+);
+
 app.use(authRoutes);
 app.use(publicRoutes);
 
-mongoose.connect('mongodb://localhost:27017/projectmanagement', {
+mongoose.connect(MongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true
