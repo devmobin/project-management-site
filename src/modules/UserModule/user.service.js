@@ -24,7 +24,7 @@ class UserService {
 
   loginUser = async loginDTO => {
     try {
-      user = await User.loginEmailPassword(loginDTO.email, loginDTO.password);
+      const user = await User.loginEmailPassword(loginDTO.email, loginDTO.password);
       return user;
     } catch (e) {
       throw new Error('Unable to login');
