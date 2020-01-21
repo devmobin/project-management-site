@@ -48,6 +48,7 @@ class Validator {
     }
 
     req.validationError = 'Enter valid email and password';
+    return next();
   };
 }
 
