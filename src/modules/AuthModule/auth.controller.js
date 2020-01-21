@@ -42,15 +42,13 @@ class AuthController {
     try {
       const user = await this.userService.loginUser(req.loginDTO);
 
-      req.session.user = user;
+      const done = await this.authService.generateSession(user, req);
 
-      return req.session.save(e => {
-        if (e) {
-          throw new Error('Server Error');
-        }
+      if (done) {
+        return res.redirect('/me');
+      }
 
-        res.redirect('/me');
-      });
+      throw new Error('Server Error');
     } catch (e) {
       render.pageTitle = 'Login';
       render.mode = 'login';
