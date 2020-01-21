@@ -29,9 +29,26 @@ class AuthController {
     }
   };
 
-  loginUser = (req, res, next) => {
-    this.authService.user();
-    res.send('ok');
+  loginUser = async (req, res, next) => {
+    let render = new RenderOptions('Profile');
+
+    if (req.validationError) {
+      render.pageTitle = 'Login';
+      render.mode = 'login';
+      render.error = req.validationError;
+      return res.render('auth', render);
+    }
+
+    try {
+      const user = await this.userService.loginUser(req.loginDTO);
+      // if no error generate session and render profile
+      return res.render('user-profile', render);
+    } catch (e) {
+      render.pageTitle = 'Login';
+      render.mode = 'login';
+      render.error = e.message;
+      return res.render('auth', render);
+    }
   };
 }
 

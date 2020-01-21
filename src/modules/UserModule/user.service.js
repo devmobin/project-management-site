@@ -21,6 +21,15 @@ class UserService {
 
     return user;
   };
+
+  loginUser = async loginDTO => {
+    try {
+      user = await User.loginEmailPassword(loginDTO.email, loginDTO.password);
+      return user;
+    } catch (e) {
+      throw new Error('Unable to login');
+    }
+  };
 }
 
 module.exports = UserService;
