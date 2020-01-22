@@ -1,5 +1,6 @@
 const SignupDTO = require('../dto/signup.dto');
 const LoginDTO = require('../dto/login.dto');
+const EditUserProfile = require('../../UserModule/dto/edit-user-profile.dto');
 
 class Validator {
   constructor() {}
@@ -50,6 +51,29 @@ class Validator {
     }
 
     req.validationError = 'Enter valid email and password';
+    return next();
+  };
+
+  editUserProfile = (req, res, next) => {
+    try {
+      const { email, name, job, bio } = req.body;
+
+      if (
+        validate(email, { type: 'email' }) &&
+        validate(name, { type: 'string', minLength: 3 }) &&
+        validate(job, { type: 'string', minLength: 3 }) &&
+        validate(bio, { type: 'string', minLength: 9 })
+      ) {
+        req.editUserProfileDTO = new EditUserProfile(email, name, job, bio);
+
+        return next();
+      }
+    } catch (e) {
+      req.validationError = 'Validation Error';
+      return next();
+    }
+
+    req.validationError = 'Enter valid values';
     return next();
   };
 }
