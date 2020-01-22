@@ -16,6 +16,7 @@ const editProject = e => {
   inputTitle.value = projectTitle;
   inputStatus.value = projectStatus;
   inputDescription.value = projectDescription;
+  document.querySelector('#inputMode').value = 'edit';
 };
 
 const deleteProject = () => {

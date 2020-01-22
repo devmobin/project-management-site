@@ -108,6 +108,8 @@ class Validator {
     req.validationError = 'Enter valid values';
     return next();
   };
+
+  editProject = (req, res, next) => {};
 }
 
 module.exports = Validator;

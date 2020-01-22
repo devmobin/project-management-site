@@ -9,13 +9,18 @@ class ProjectController {
     }
 
     try {
-      const project = await this.projectService.addProject(req.addProjectDTO);
+      const project = await this.projectService.addProject(
+        req.addProjectDTO,
+        req.session.user._id
+      );
 
       return res.status(201).send(project);
     } catch (e) {
       return res.status(500).send({ error: e.message });
     }
   };
+
+  editProject = async (req, res, next) => {};
 }
 
 module.exports = ProjectController;

@@ -14,4 +14,11 @@ router.post(
   projectController.addProject
 );
 
+router.post(
+  '/edit-project',
+  isAuth,
+  Validator.editProject,
+  projectController.editProject
+);
+
 module.exports = router;
