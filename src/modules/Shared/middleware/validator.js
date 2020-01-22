@@ -2,6 +2,7 @@ const SignupDTO = require('../dto/signup.dto');
 const LoginDTO = require('../dto/login.dto');
 const EditUserProfile = require('../../UserModule/dto/edit-user-profile.dto');
 const AddProjectDTO = require('../../ProjectModule/dto/add-project.dto');
+const EditProjectDTO = require('../../ProjectModule/dto/edit-project.dto');
 
 class Validator {
   constructor() {}
@@ -109,7 +110,33 @@ class Validator {
     return next();
   };
 
-  editProject = (req, res, next) => {};
+  editProject = (req, res, next) => {
+    try {
+      const { id, title, status, description } = req.body;
+
+      if (
+        validate(id.trim(), { type: 'string', minLength: 6 }) &&
+        validate(title.trim(), { type: 'string', minLength: 3 }) &&
+        validate(description.trim(), { type: 'string', minLength: 10 }) &&
+        (status.trim().toLowerCase() === 'active' ||
+          status.trim().toLowerCase() === 'finished')
+      ) {
+        req.editProjectDTO = new EditProjectDTO(
+          id.trim(),
+          title.trim(),
+          status.trim(),
+          description.trim()
+        );
+        return next();
+      }
+    } catch (e) {
+      req.validationError = 'Validation Error';
+      return next();
+    }
+
+    req.validationError = 'Enter valid values';
+    return next();
+  };
 }
 
 module.exports = Validator;

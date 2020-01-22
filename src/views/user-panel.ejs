@@ -74,29 +74,31 @@
               </tr>
             </thead>
             <tbody>
-              <tr data-id="project id">
-                <td class="_title" >Mark</td>
-                <td class="_status" >Otto</td>
-                <td class="_description" >Otto</td>
-                <td>
-                  <a
-                    class="btn btn-sm btn-outline-primary mr-2"
-                    data-toggle="modal"
-                    data-target="#add-edit-modal"
-                    onclick="editProject(this)" 
-                  >
-                    Edit
-                  </a>
-                  <a
-                    class="btn btn-sm btn-outline-danger"
-                    data-toggle="modal"
-                    data-target="#delete-modal"
-                    onclick="deleteProject(this)"
-                  >
-                    Delete
-                  </a>
-                </td>
-              </tr>
+              <% for(project of user.projects) { %>
+                <tr data-id="<%= project._id %>">
+                  <td class="_title" ><%= project.title %></td>
+                  <td class="_status" ><%= project.status %></td>
+                  <td class="_description" ><%= project.description %></td>
+                  <td>
+                    <a
+                      class="btn btn-sm btn-outline-primary mr-2"
+                      data-toggle="modal"
+                      data-target="#add-edit-modal"
+                      onclick="editProject(this)" 
+                    >
+                      Edit
+                    </a>
+                    <a
+                      class="btn btn-sm btn-outline-danger"
+                      data-toggle="modal"
+                      data-target="#delete-modal"
+                      onclick="deleteProject(this)"
+                    >
+                      Delete
+                    </a>
+                  </td>
+                </tr>
+              <%  } %>
             </tbody>
           </table>
         </div>

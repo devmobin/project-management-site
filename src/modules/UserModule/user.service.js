@@ -36,7 +36,9 @@ class UserService {
 
   getUserInfo = async id => {
     try {
-      const user = await User.findById(id);
+      const user = await User.findOne({ _id: id });
+      await user.populate('projects').execPopulate();
+
       return user;
     } catch (e) {
       throw new Error('database error');

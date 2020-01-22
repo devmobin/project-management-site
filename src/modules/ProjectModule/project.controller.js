@@ -20,7 +20,22 @@ class ProjectController {
     }
   };
 
-  editProject = async (req, res, next) => {};
+  editProject = async (req, res, next) => {
+    if (req.validationError) {
+      return res.status(400).send({ error: req.validationError });
+    }
+
+    try {
+      const project = await this.projectService.editProject(
+        req.editProjectDTO,
+        req.session.user._id
+      );
+
+      return res.status(200).send(project);
+    } catch (e) {
+      return res.status(500).send({ error: e.message });
+    }
+  };
 }
 
 module.exports = ProjectController;

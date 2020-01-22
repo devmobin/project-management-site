@@ -36,6 +36,7 @@ const btnSaveClick = e => {
   const mode = modalBody.querySelector('#inputMode').value;
 
   const btnClose = document.querySelector('#btnClose');
+  const inputId = document.querySelector('#inputEditProjectId');
   const inputTitle = document.querySelector('#inputEditProjectTitle');
   const inputStatus = document.querySelector('#inputEditProjectStatus');
   const inputDescription = document.querySelector(
@@ -56,5 +57,16 @@ const btnSaveClick = e => {
   }
 
   if (mode === 'edit') {
+    const body = {
+      id: inputId.value,
+      title: inputTitle.value,
+      status: inputStatus.value,
+      description: inputDescription.value
+    };
+    
+    $.post('/edit-project', body, data => {
+      btnClose.click();
+      location.reload();
+    });
   }
 };
