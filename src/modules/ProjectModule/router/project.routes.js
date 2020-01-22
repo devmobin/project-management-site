@@ -21,4 +21,6 @@ router.post(
   projectController.editProject
 );
 
+router.delete('/project/:id', isAuth, projectController.deleteProject);
+
 module.exports = router;

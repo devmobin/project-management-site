@@ -19,10 +19,6 @@ const editProject = e => {
   document.querySelector('#inputMode').value = 'edit';
 };
 
-const deleteProject = () => {
-  console.log('hello delete');
-};
-
 const clearInputs = () => {
   document.querySelector('#inputMode').value = 'add';
   document.querySelector('#inputEditProjectId').value = '';
@@ -63,10 +59,31 @@ const btnSaveClick = e => {
       status: inputStatus.value,
       description: inputDescription.value
     };
-    
+
     $.post('/edit-project', body, data => {
       btnClose.click();
       location.reload();
     });
   }
+};
+
+const deleteProjectModal = e => {
+  const row = e.parentNode.parentNode;
+  const projectId = row.dataset.id;
+  const projectTitle = row.querySelector('._title').textContent;
+
+  document.querySelector('#spanTitle').textContent = projectTitle;
+  document.querySelector('#btnDelete').dataset.id = projectId;
+};
+
+const deleteProject = e => {
+  const btnClose = document.querySelector('#btnCloseDelete');
+
+  $.ajax({
+    url: `/project/${e.dataset.id}`,
+    type: 'DELETE',
+    complete: function() {
+      location.reload();
+    }
+  });
 };

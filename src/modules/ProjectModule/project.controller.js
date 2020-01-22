@@ -36,6 +36,18 @@ class ProjectController {
       return res.status(500).send({ error: e.message });
     }
   };
+
+  deleteProject = async (req, res, next) => {
+    try {
+      await this.projectService.deleteProject(
+        req.params.id,
+        req.session.user._id
+      );
+      return res.send();
+    } catch (e) {
+      return res.status(500).send({ error: e.message });
+    }
+  };
 }
 
 module.exports = ProjectController;

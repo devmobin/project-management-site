@@ -41,6 +41,23 @@ class ProjectService {
       throw new Error('database error');
     }
   };
+
+  deleteProject = async (projectId, userId) => {
+    try {
+      const project = await Project.findOneAndDelete({
+        _id: projectId,
+        owner: userId
+      });
+
+      if (!project) {
+        throw new Error('Project not found');
+      }
+
+      return project;
+    } catch (e) {
+      throw new Error('database error');
+    }
+  };
 }
 
 module.exports = ProjectService;
