@@ -33,6 +33,10 @@ class UserService {
       throw new Error('Unable to login');
     }
   };
+
+  editProfile = async editUserProfileDTO => {
+    
+  };
 }
 
 module.exports = UserService;

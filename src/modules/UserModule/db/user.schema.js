@@ -15,6 +15,16 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true
+    },
+    job: {
+      type: String,
+      required: false,
+      default: 'Developer'
+    },
+    bio: {
+      type: String,
+      required: false,
+      default: 'Your bio goes here. just edit your profile'
     }
   },
   {

@@ -9,7 +9,7 @@
       <div class="container">
         <div class="navbar-translate">
           <a class="navbar-brand" href="#">
-            User Profile
+            Hello <%= user.name %>
           </a>
           <button
             class="navbar-toggler"
@@ -64,18 +64,15 @@
                   />
                 </div>
                 <div class="name">
-                  <h3 class="title">Christian Louboutin</h3>
-                  <h6>Developer</h6>
+                  <h3 class="title"><%= user.name %></h3>
+                  <h6><%= user.job %></h6>
                 </div>
               </div>
             </div>
           </div>
           <div class="description text-center">
             <p>
-              An artist of considerable range, Chet Faker &#x2014; the name
-              taken by Melbourne-raised, Brooklyn-based Nick Murphy &#x2014;
-              writes, performs and records all of his own music, giving it a
-              warm, intimate feel with a solid groove structure.
+              <%= user.bio %>
             </p>
           </div>
         </div>
@@ -121,13 +118,13 @@
                 <div class="col">
                   <div class="input-group bmd-form-group">
                     <label class="bmd-label-floating">Your Name</label>
-                    <input type="text" class="form-control" />
+                    <input id="inputName" type="text" class="form-control" value="<%= user.name %>" />
                   </div>
                 </div>
                 <div class="col">
                   <div class="input-group bmd-form-group">
                     <label class="bmd-label-floating">Job Title</label>
-                    <input type="text" class="form-control" />
+                    <input id="inputJob" type="text" class="form-control" value="<%= user.job %>" />
                   </div>
                 </div>
               </div>
@@ -138,7 +135,7 @@
                   class="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
-                ></textarea>
+                ><%= user.bio %></textarea>
               </div>
             </form>
           </div>
@@ -150,10 +147,19 @@
             >
               Cancel
             </button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button id="submitProfile" type="button" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>
     </div>
-    
+    <script>
+      const submitProfile = document.querySelector('#submitProfile');
+      
+      submitProfile.addEventListener('click', (e) => {
+        const name = document.querySelector('#inputName').value;
+        const job = document.querySelector('#inputJob').value;
+        const bio = document.querySelector('#exampleFormControlTextarea1').value;
+            
+      })
+    </script>
     <%- include('./includes/src') %>
