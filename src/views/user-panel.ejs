@@ -32,6 +32,7 @@
                 class="nav-link"
                 data-toggle="modal"
                 data-target="#add-edit-modal"
+                onclick="clearInputs()"
               >
                 <i class="material-icons">add</i> Add Project
               </a>
@@ -66,7 +67,6 @@
           >
             <thead>
               <tr>
-                <th scope="col">id</th>
                 <th scope="col">Project Title</th>
                 <th scope="col">Status</th>
                 <th scope="col">Description</th>
@@ -74,16 +74,16 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>Otto</td>
+              <tr data-id="project id">
+                <td class="_title" >Mark</td>
+                <td class="_status" >Otto</td>
+                <td class="_description" >Otto</td>
                 <td>
                   <a
                     class="btn btn-sm btn-outline-primary mr-2"
                     data-toggle="modal"
                     data-target="#add-edit-modal"
+                    onclick="editProject(this)" 
                   >
                     Edit
                   </a>
@@ -91,63 +91,8 @@
                     class="btn btn-sm btn-outline-danger"
                     data-toggle="modal"
                     data-target="#delete-modal"
+                    onclick="deleteProject(this)"
                   >
-                    Delete
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Otto</td>
-                <td>Thornton</td>
-                <td>
-                  <a class="btn btn-sm btn-outline-primary mr-2">
-                    Edit
-                  </a>
-                  <a class="btn btn-sm btn-outline-danger">
-                    Delete
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Otto</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>
-                  <a class="btn btn-sm btn-outline-primary mr-2">
-                    Edit
-                  </a>
-                  <a class="btn btn-sm btn-outline-danger">
-                    Delete
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Otto</td>
-                <td>Thornton</td>
-                <td>
-                  <a class="btn btn-sm btn-outline-primary mr-2">
-                    Edit
-                  </a>
-                  <a class="btn btn-sm btn-outline-danger">
-                    Delete
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Otto</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>
-                  <a class="btn btn-sm btn-outline-primary mr-2">
-                    Edit
-                  </a>
-                  <a class="btn btn-sm btn-outline-danger">
                     Delete
                   </a>
                 </td>
@@ -217,7 +162,8 @@
                 <div class="col">
                   <div class="input-group bmd-form-group">
                     <label class="bmd-label-floating">Project Title</label>
-                    <input type="text" class="form-control" />
+                    <input id="inputEditProjectTitle" type="text" class="form-control" />
+                    <input id="inputEditProjectId" type="hidden"/>
                   </div>
                 </div>
                 <div class="col">
@@ -225,7 +171,7 @@
                     <label class="bmd-label-floating"
                       >Project Status (is active or finished)</label
                     >
-                    <input type="text" class="form-control" />
+                    <input id="inputEditProjectStatus" type="text" class="form-control" />
                   </div>
                 </div>
               </div>
@@ -233,7 +179,7 @@
                 <label class="bmd-label-floating">Project Description</label>
                 <textarea
                   class="form-control"
-                  id="exampleFormControlTextarea1"
+                  id="inputEditProjectDescription"
                   rows="3"
                 ></textarea>
               </div>
@@ -277,3 +223,5 @@
     </footer>
 
 <%- include('./includes/src') %>
+
+<script src="/assets/js/user-panel.js"></script>

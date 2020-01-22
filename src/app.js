@@ -11,6 +11,7 @@ const app = express();
 const { MongoURI } = require('./config/config');
 const authRoutes = require('./modules/AuthModule/router/auth.routes');
 const userRoutes = require('./modules/UserModule/router/user.routes');
+const projectRoutes = require('./modules/ProjectModule/router/project.routes');
 const publicRoutes = require('./modules/Shared/router/public.routes');
 
 app.use(express.json());
@@ -36,6 +37,7 @@ app.use(
 
 app.use(authRoutes);
 app.use(userRoutes);
+app.use(projectRoutes);
 app.use(publicRoutes);
 
 mongoose.connect(MongoURI, {
