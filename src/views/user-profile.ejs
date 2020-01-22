@@ -108,6 +108,7 @@
               class="close"
               data-dismiss="modal"
               aria-label="Close"
+              id="btnClose"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -119,6 +120,7 @@
                   <div class="input-group bmd-form-group">
                     <label class="bmd-label-floating">Your Name</label>
                     <input id="inputName" type="text" class="form-control" value="<%= user.name %>" />
+                    <input type="hidden" name="email" id="inputEmail" value="<%= user.email %>">
                   </div>
                 </div>
                 <div class="col">
@@ -152,14 +154,5 @@
         </div>
       </div>
     </div>
-    <script>
-      const submitProfile = document.querySelector('#submitProfile');
-      
-      submitProfile.addEventListener('click', (e) => {
-        const name = document.querySelector('#inputName').value;
-        const job = document.querySelector('#inputJob').value;
-        const bio = document.querySelector('#exampleFormControlTextarea1').value;
-            
-      })
-    </script>
     <%- include('./includes/src') %>
+    <script src="/assets/js/user-profile.js"></script>

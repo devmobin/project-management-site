@@ -34,8 +34,31 @@ class UserService {
     }
   };
 
+  getUserInfo = async id => {
+    try {
+      const user = await User.findById(id);
+      return user;
+    } catch (e) {
+      throw new Error('database error');
+    }
+  };
+
   editProfile = async editUserProfileDTO => {
-    
+    try {
+      const user = await User.findOne({ email: editUserProfileDTO.email });
+
+      if (!user) {
+        throw new Error('User is not exists');
+      }
+
+      Object.keys(editUserProfileDTO).forEach(key => {
+        user[key] = editUserProfileDTO[key];
+      });
+
+      return await user.save();
+    } catch (e) {
+      throw new Error(e.message);
+    }
   };
 }
 

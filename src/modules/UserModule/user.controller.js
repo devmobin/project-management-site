@@ -9,7 +9,7 @@ class UserController {
   renderProfile = async (req, res, next) => {
     const render = new RenderOptions('Your Profile');
 
-    render.user = req.session.user;
+    render.user = await this.userService.getUserInfo(req.session.user._id);
 
     res.render('user-profile', render);
   };
@@ -17,13 +17,25 @@ class UserController {
   renderPanel = async (req, res, next) => {
     const render = new RenderOptions('Your Panel');
 
-    render.user = req.session.user;
+    render.user = await this.userService.getUserInfo(req.session.user._id);
 
     res.render('user-panel', render);
   };
 
   editProfile = async (req, res, next) => {
-    
+    if (req.validationError) {
+      return res.status(400).send({
+        error: req.validationError
+      });
+    }
+
+    try {
+      const user = await this.userService.editProfile(req.editUserProfileDTO);
+
+      return res.status(200).send(user);
+    } catch (e) {
+      return res.status(500).send({ error: 'database error' });
+    }
   };
 }
 
