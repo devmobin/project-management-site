@@ -11,6 +11,11 @@ router.get('/me', isAuth, userController.renderProfile);
 
 router.get('/panel', isAuth, userController.renderPanel);
 
-router.post('/edit-profile', isAuth, userController.editProfile)
+router.post(
+  '/edit-profile',
+  isAuth,
+  Validator.editUserProfile,
+  userController.editProfile
+);
 
 module.exports = router;
