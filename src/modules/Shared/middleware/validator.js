@@ -1,6 +1,7 @@
 const SignupDTO = require('../dto/signup.dto');
 const LoginDTO = require('../dto/login.dto');
 const EditUserProfile = require('../../UserModule/dto/edit-user-profile.dto');
+const AddProjectDTO = require('../../ProjectModule/dto/add-project.dto');
 
 class Validator {
   constructor() {}
@@ -59,13 +60,44 @@ class Validator {
       const { email, name, job, bio } = req.body;
 
       if (
-        validate(email, { type: 'email' }) &&
-        validate(name, { type: 'string', minLength: 3 }) &&
-        validate(job, { type: 'string', minLength: 3 }) &&
-        validate(bio, { type: 'string', minLength: 9 })
+        validate(email.trim(), { type: 'email' }) &&
+        validate(name.trim(), { type: 'string', minLength: 3 }) &&
+        validate(job.trim(), { type: 'string', minLength: 3 }) &&
+        validate(bio.trim(), { type: 'string', minLength: 9 })
       ) {
-        req.editUserProfileDTO = new EditUserProfile(email, name, job, bio);
+        req.editUserProfileDTO = new EditUserProfile(
+          email.trim(),
+          name.trim(),
+          job.trim(),
+          bio.trim()
+        );
 
+        return next();
+      }
+    } catch (e) {
+      req.validationError = 'Validation Error';
+      return next();
+    }
+
+    req.validationError = 'Enter valid values';
+    return next();
+  };
+
+  addProject = (req, res, next) => {
+    try {
+      const { title, status, description } = req.body;
+
+      if (
+        validate(title.trim(), { type: 'string', minLength: 3 }) &&
+        validate(description.trim(), { type: 'string', minLength: 10 }) &&
+        (status.trim().toLowerCase() === 'active' ||
+          status.trim().toLowerCase() === 'finished')
+      ) {
+        req.addProjectDTO = new AddProjectDTO(
+          title.trim(),
+          status.trim(),
+          description.trim()
+        );
         return next();
       }
     } catch (e) {

@@ -148,6 +148,7 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLabel">Add Project</h5>
             <button
+              id="btnClose"
               type="button"
               class="close"
               data-dismiss="modal"
@@ -164,6 +165,7 @@
                     <label class="bmd-label-floating">Project Title</label>
                     <input id="inputEditProjectTitle" type="text" class="form-control" />
                     <input id="inputEditProjectId" type="hidden"/>
+                    <input id="inputMode" type="hidden" value="add" />
                   </div>
                 </div>
                 <div class="col">
@@ -193,7 +195,7 @@
             >
               Cancel
             </button>
-            <button type="button" class="btn btn-primary">Save</button>
+            <button onclick="btnSaveClick(this)" type="button" class="btn btn-primary">Save</button>
           </div>
         </div>
       </div>

@@ -7,6 +7,11 @@ const router = express.Router();
 const projectController = BeanFactory.getInstance('IProjectController');
 const Validator = BeanFactory.getInstance('IValidator');
 
-
+router.post(
+  '/add-project',
+  isAuth,
+  Validator.addProject,
+  projectController.addProject
+);
 
 module.exports = router;
